@@ -1,0 +1,54 @@
+tree("Root")
+	repeat
+		fallback
+			tree("isDie")
+			tree("Patrol")
+			tree("Attack")
+
+tree("isDie")	
+	sequence
+		Die
+		Dead
+		Wait(1.0)
+		
+tree("Patrol")	
+		sequence
+			not isPlayerDectected
+			repeat
+				random
+					Move(0.0,0.0,0.0)
+					Move(5.0,0.0,0.0)
+					Move(5.0,0.0,5.0)
+					Move(0.0,0.0,5.0)
+			
+tree("Attack")
+		fallback
+			sequence
+				isPlayerDectected
+				Chase
+			sequence
+				inAttackArea
+				fallback
+					sequence
+						ManyHP
+						DefaultAttack					
+						Wait(0.5)
+					sequence
+						HalfHP
+						fallback
+							random
+								sequence
+									Barrier
+									Wait(1.0)
+								sequence									
+									DefaultAttack
+									Wait(0.5)
+								sequence
+									TornadoAttack
+									Wait(1.0)
+					sequence
+						LowHP
+						RunAway
+					
+
+

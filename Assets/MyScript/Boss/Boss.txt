@@ -1,0 +1,67 @@
+tree("Root")
+	repeat
+		fallback
+			tree("isDie")
+			tree("Spawn")
+			tree("Chase")
+			tree("Attack")
+			
+tree("isDie")	
+	sequence
+		isDie
+		Dead
+		Wait(2.0)
+		Scenechange
+tree("Spawn")
+	sequence
+		not isPlayerDectected
+		Wait(1.2)
+		Attack
+		Wait(0.8)
+		Spawn
+		
+tree("Chase")
+	sequence
+		isPlayerDectected
+		Chase
+tree("Attack")
+	sequence
+		inAttackArea
+		fallback
+			sequence
+				ManyHP
+				SkillAttack
+				Wait(1.0)
+				Attack
+				Wait(1.0)
+			sequence				
+				HalfHP
+				random
+					SkillAttack
+					LavaAttack
+					Attack			
+				LavaAttack
+				Wait(1.0)
+				Attack
+				Wait(1.0)
+			sequence				
+				LowHP
+				Attack
+				Wait(0.7)
+				LavaAttack
+				Wait(0.8)
+				Attack
+				Wait(1.0)
+				random
+					FollowingAttack
+					Attack
+					SkillAttack
+				Wait(0.5)
+			
+				
+	
+	
+
+
+
+		
